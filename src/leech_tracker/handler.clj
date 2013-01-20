@@ -1,7 +1,8 @@
 (ns leech-tracker.handler
   (:use compojure.core)
   (:require [compojure.handler :as handler]
-            [compojure.route :as route]))
+            [compojure.route :as route]
+            [ring.middleware.params :as params]))
 
 (defroutes app-routes
   (GET "/" [] (slurp (clojure.java.io/resource "templates/base.html")))
@@ -10,4 +11,4 @@
   (route/not-found (slurp (clojure.java.io/resource "templates/404.html"))))
 
 (def app
-  (handler/site app-routes))
+  (params/wrap-params (handler/site app-routes)))
