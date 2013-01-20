@@ -2,8 +2,38 @@
 <html>
   <head>
     <title>Leech Tracker</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.1.1/spruce/bootstrap.min.css">
   </head>
   <body>
-    <h1>Leech Tracker!</h1>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1>Leech Tracker!</h1>
+          <div>
+            <ul id="blockedList">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $.ajax({
+          'url': '/list/'
+      }).done(function(data){
+          var list = $('#blockedList')
+          JSON.parse(data).forEach(function(element){
+              var item = $('<li>', {
+                  text: ' at ' + element.when,
+              })
+              item.prepend($('<a>', {
+                  href: element.url,
+                  text: element.url,
+              }))
+              list.append(item)
+          })
+      })
+    </script>
   </body>
 </html>
