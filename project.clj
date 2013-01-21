@@ -2,6 +2,7 @@
   :description "Tracks what sites LeechBlocked for you."
   :url "https://github.com/wraithan/leech-tracker"
   :dependencies [[cheshire "5.0.1"]
+                 [clabango "0.4"]
                  [compojure "1.1.5"]
                  [org.clojure/clojure "1.4.0"]
                  [org.clojure/java.jdbc "0.2.3"]

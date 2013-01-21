@@ -1,31 +1,30 @@
 (ns leech-tracker.handler
   (:use compojure.core)
-  (:require [compojure.handler :as handler]
+  (:require [cheshire.core :as json]
+            [clabango.parser :refer [render-file]]
+            [clojure.java.jdbc :as sql]
             [compojure.route :as route]
-            [cheshire.core :as json]
-            [clojure.java.jdbc :as sql]))
+            [compojure.handler :as handler]))
+
+(def get-index (render-file "leech_tracker/templates/base.html" {}))
+(def get-blocked (render-file "leech_tracker/templates/blocked.html" {}))
+(defn post-blocked [body]
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (sql/insert-record
+     :blocked {:url (get (json/parse-string (slurp body) true) :url)})))
+(def get-list
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (json/generate-string (sql/with-query-results results
+                            ["SELECT * FROM blocked"]
+                            (into [] results)))))
+(def not-found (render-file  "leech_tracker/templates/404.html" {}))
 
 (defroutes app-routes
-  (GET "/" []
-       (slurp (clojure.java.io/resource "templates/base.html")))
-
-  (GET "/blocked/" []
-       (slurp (clojure.java.io/resource "templates/blocked.html")))
-
-  (POST "/blocked/"
-        {body :body}
-        (sql/with-connection (System/getenv "DATABASE_URL")
-          (sql/insert-record
-           :blocked {:url (get (json/parse-string (slurp body) true) :url)})))
-
-  (GET "/list/" []
-       (sql/with-connection (System/getenv "DATABASE_URL")
-         (json/generate-string (sql/with-query-results results
-            ["SELECT * FROM blocked"]
-            (into [] results)))))
-
-  (route/not-found
-   (slurp (clojure.java.io/resource "templates/404.html"))))
+  (GET "/" [] get-index)
+  (GET "/blocked/" [] get-blocked)
+  (POST "/blocked/" {body :body} (post-blocked body))
+  (GET "/list/" [] get-list)
+  (route/not-found not-found))
 
 (def app
   (handler/site app-routes))

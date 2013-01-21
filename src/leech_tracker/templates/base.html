@@ -1,24 +1,30 @@
 <!doctype html>
 <html>
   <head>
-    <title>Leech Tracker</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
     </script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.1.1/spruce/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.1.1/united/bootstrap.min.css">
+    {% block head %}
+    <title>Leech Tracker</title>
+    {% endblock %}
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="span12">
+          {% block content%}
           <h1>Leech Tracker!</h1>
           <div>
             <ul id="blockedList">
             </ul>
           </div>
+          {% endblock content %}
         </div>
       </div>
     </div>
+    {% block js %}
     <script type="text/javascript">
+      var sometime = null
       $.ajax({
           'url': '/list/'
       }).done(function(data){
@@ -35,5 +41,6 @@
           })
       })
     </script>
+    {% endblock js %}
   </body>
 </html>
