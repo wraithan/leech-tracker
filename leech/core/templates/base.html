@@ -23,7 +23,7 @@
                 {% if user.is_authenticated %}
                 <a class="browserid-logout" href="{% url 'logout' %}">Sign Out</a>
                 {% else %}
-                <a class="browserid-login" href="#">Sign In</a>
+                <a class="browserid-login" {% if next %}data-return-to={{next}}{% endif %} href="#">Sign In</a>
                 <form class="browserid-form" method="POST" action="{% url 'browserid_verify' %}">
                   {% csrf_token %}
                   {{ browserid_form.as_p }}

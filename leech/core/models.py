@@ -10,7 +10,7 @@ class Block(models.Model):
     domain = models.CharField(max_length=255)
     when = models.DateTimeField(default=datetime.now)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.domain:
             self.domain = urlparse(self.url).netloc
-        super(Block, self).save()
+        super(Block, self).save(*args, **kwargs)
