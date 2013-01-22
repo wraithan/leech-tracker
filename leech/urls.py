@@ -6,5 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',  # view prefix
+    url(r'^browserid/', include('django_browserid.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
