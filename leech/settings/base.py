@@ -10,10 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DEFAULT_DB = 'postgresql://localhost/leech'
-
 DATABASES = {
-    'default': dj_database_url.config(default=DEFAULT_DB)
+    'default': dj_database_url.config(default='postgresql://localhost/leech')
 }
 
 # Local time zone for this installation. Choices can be found here:
