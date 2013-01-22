@@ -6,4 +6,9 @@
 
 {% block content %}
 <h1>Leech Tracker</h1>
+<ul>
+  {% for obj in object_list %}
+  <li><a href="{{obj.url}}"">{{obj.url}}</a> on {{obj.when}}</li>
+  {% endfor %}
+</ul>
 {% endblock content%}
