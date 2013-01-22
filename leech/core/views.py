@@ -1,7 +1,11 @@
+import logging
+
 from django.views.generic.list import ListView
 
 from .models import Block
 
+
+logger = logging.getLogger('core')
 
 class BlockList(ListView):
     model = Block
