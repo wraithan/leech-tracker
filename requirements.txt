@@ -1,0 +1,4 @@
+https://www.djangoproject.com/download/1.5c1/tarball/
+django-browserid
+psycopg2
+dj-database-url
