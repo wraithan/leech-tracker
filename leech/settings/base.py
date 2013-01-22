@@ -1,3 +1,5 @@
+from os.path import dirname, abspath, join
+
 import dj_database_url
 
 DEBUG = True
@@ -21,9 +23,10 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+ROOT_DIR = dirname(dirname(abspath(__file__ + '/../')))
 MEDIA_ROOT = ''
 MEDIA_URL = ''
-STATIC_ROOT = ''
+STATIC_ROOT = join(ROOT_DIR, 'static/')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ()
 STATICFILES_FINDERS = (

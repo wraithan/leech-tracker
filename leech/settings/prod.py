@@ -6,7 +6,7 @@ from .base import *
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 STATIC_URL = 'http://media.leechtracker.net/static/'
-SITE_URL = 'leech.com'
+SITE_URL = 'leechtracker.net'
 SENTRY_DSN = getenv('SENTRY_DSN', None)
 
 INSTALLED_APPS += ('gunicorn',)
