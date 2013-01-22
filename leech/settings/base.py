@@ -10,7 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DEFAULT_DB = 'postgresql://localhost/spendingq'
+DEFAULT_DB = 'postgresql://localhost/leech'
 
 DATABASES = {
     'default': dj_database_url.config(default=DEFAULT_DB)
