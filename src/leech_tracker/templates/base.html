@@ -5,42 +5,28 @@
     </script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.1.1/united/bootstrap.min.css">
     {% block head %}
-    <title>Leech Tracker</title>
     {% endblock %}
   </head>
   <body>
     <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="/">Leech Tracker</a>
+            <ul class="nav">
+              <li><a href="#">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="span12">
           {% block content%}
-          <h1>Leech Tracker!</h1>
-          <div>
-            <ul id="blockedList">
-            </ul>
-          </div>
           {% endblock content %}
         </div>
       </div>
     </div>
     {% block js %}
-    <script type="text/javascript">
-      var sometime = null
-      $.ajax({
-          'url': '/list/'
-      }).done(function(data){
-          var list = $('#blockedList')
-          JSON.parse(data).forEach(function(element){
-              var item = $('<li>', {
-                  text: ' at ' + element.when,
-              })
-              item.prepend($('<a>', {
-                  href: element.url,
-                  text: element.url,
-              }))
-              list.append(item)
-          })
-      })
-    </script>
     {% endblock js %}
   </body>
 </html>

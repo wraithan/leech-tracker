@@ -2,24 +2,11 @@
 
 {% block head %}
     <title>Blocked!</title>
-    <style type="text/css">
-      #url {font-weight: bold;}
-    </style>
+    <link href="/css/blocked.css" rel="stylesheet">
+    <script src="/js/blocked.js" type="text/javascript">
+    </script>
 {% endblock %}
 
 {% block content %}
     <p>Blocked <span id="url"></span> ! Get back to work!</p>
-{% endblock %}
-
-{% block js %}
-    <script type="text/javascript">
-      var blockedUrl = (/url=(.+?)(&|$)/.exec(location.search)||[,null])[1]
-      document.getElementById('url').textContent = blockedUrl
-      $.ajax({
-          'url': '/blocked/',
-          'contentType': 'application/data',
-          'data': JSON.stringify({'url': blockedUrl}),
-          'type': 'POST',
-      })
-    </script>
 {% endblock %}
