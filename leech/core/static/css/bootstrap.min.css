@@ -890,7 +890,7 @@ div.subnav .nav>li.dropdown.open>.dropdown-toggle{border-left:1px solid whiteSmo
 .label-success,.badge-success{background-color:#3cb521;}
 .label-info,.badge-info{background-color:#3399f3;}
 h3{margin-top:0px;}
-.footer{border-top:1px solid rgba(0, 0, 0, 0.1);}
+.footer{padding-top:4px;border-top:1px solid rgba(0, 0, 0, 0.1);}
 .well{-webkit-box-shadow:inset 1px 1px 0 rgba(0, 0, 0, 0.1);-moz-box-shadow:inset 1px 1px 0 rgba(0, 0, 0, 0.1);box-shadow:inset 1px 1px 0 rgba(0, 0, 0, 0.1);}
 .hero-unit{-webkit-box-shadow:inset 1px 1px 0 rgba(0, 0, 0, 0.1);-moz-box-shadow:inset 1px 1px 0 rgba(0, 0, 0, 0.1);box-shadow:inset 1px 1px 0 rgba(0, 0, 0, 0.1);border:1px solid rgba(0, 0, 0, 0.1);}
 .pull-right{float:right;}
