@@ -8,10 +8,19 @@
 <h3>Welcome</h3>
 <p>This is a website to use in conjunction with LeechBlock an add-on for
 Mozilla's Firefox. It tracks what sites LeechBlock has blocked for you. It has
-two intentional effects. You can what times of the day you are particularly
+two intentional effects. You can see what times of the day you are particularly
 prone to procrastination attempts, as well as giving you a list of things you
 tried to view during your block hours so you can go back and view them
 later!</p>
+
+<h3>Getting Started</h3>
+
+<p>To start using Leech Tracker you'll need to change your block page in
+LeechBlock. In each 'Block Set' go to the 'How to Block' tab and set the url
+to: <code>http://leechtracker.net/block-url/?url=$U</code>. It is simple as
+that. You can <a class="browserid-login" href="#">sign in</a> now or wait until
+you get your first block and it reminds you.</p>
+
 
 {% if user.is_authenticated %}
 <h4>URLs blocked so far:</h4>
@@ -20,7 +29,5 @@ later!</p>
   <li><a href="{{obj.url}}">{{obj.url}}</a> on {{obj.when}}</li>
   {% endfor %}
 </ul>
-{% else %}
-<p>You'll need to login if you want to use this site.</p>
 {% endif %}
 {% endblock content%}
