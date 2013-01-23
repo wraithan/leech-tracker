@@ -10,7 +10,7 @@ s3 = {
 @task
 def deploy():
     local('git push heroku')
-    local('heroku run ./manage.py migrate')
+    # local('heroku run ./manage.py migrate')
     media()
 
 

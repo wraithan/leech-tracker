@@ -3,7 +3,7 @@
   <head>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
     </script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.1.1/united/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
     {{ browserid_form.media }}
     {% block head %}
@@ -23,9 +23,12 @@
                 {% if user.is_authenticated %}
                 <a class="browserid-logout" href="{% url 'logout' %}">Sign Out</a>
                 {% else %}
-                <a class="browserid-login" {% if next %}data-return-to={{next}}{% endif %} href="#">Sign In</a>
+                <a class="browserid-login" href="#">Sign In</a>
                 <form class="browserid-form" method="POST" action="{% url 'browserid_verify' %}">
                   {% csrf_token %}
+                  {% if next %}
+                  <input type="hidden" name="next" value="{{ next }}">
+                  {% endif %}
                   {{ browserid_form.as_p }}
                 </form>
                 {% endif %}
@@ -40,6 +43,9 @@
           {% endblock content %}
         </div>
       </div>
+    <footer class="footer">
+      <p>This is a site by <a href="http://wraithan.net">Wraithan</a> and is open source. The repo is <a href="https://github.com/wraithan/leech-tracker">wraihan/leech-tracker</a>. Please report issues and feature requests in the <a href="https://github.com/wraithan/leech-tracker/issues">issue tracker</a>.</p>
+    </footer>
     </div>
     {% block js %}
     {% endblock js %}

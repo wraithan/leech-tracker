@@ -5,10 +5,22 @@
 {% endblock head %}
 
 {% block content %}
-<h1>Leech Tracker</h1>
+<h3>Welcome</h3>
+<p>This is a website to use in conjunction with LeechBlock an add-on for
+Mozilla's Firefox. It tracks what sites LeechBlock has blocked for you. It has
+two intentional effects. You can what times of the day you are particularly
+prone to procrastination attempts, as well as giving you a list of things you
+tried to view during your block hours so you can go back and view them
+later!</p>
+
+{% if user.is_authenticated %}
+<h4>URLs blocked so far:</h4>
 <ul>
   {% for obj in object_list %}
-  <li><a href="{{obj.url}}"">{{obj.url}}</a> on {{obj.when}}</li>
+  <li><a href="{{obj.url}}">{{obj.url}}</a> on {{obj.when}}</li>
   {% endfor %}
 </ul>
+{% else %}
+<p>You'll need to login if you want to use this site.</p>
+{% endif %}
 {% endblock content%}
