@@ -29,7 +29,7 @@ var svg = d3.select("#graph").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 var count = 0
-d3.json("/stats/all-time.json", function(error, data) {
+d3.json("/stats/all-time-blocks.json", function(error, data) {
     var total = 0
     data.forEach(function(d){
         total += d.count

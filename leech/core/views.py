@@ -3,6 +3,7 @@ import logging
 import json
 
 from django import http
+from django.contrib.auth.models import User
 from django.db.models import Count
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
@@ -47,11 +48,21 @@ class DateTimeJSONEncoder(json.JSONEncoder):
             return super(DateTimeJSONEncoder, self).default(obj)
 
 
-class AllTimeStats(TemplateView):
+class AllTimeBlocks(TemplateView):
     def render_to_response(self, context):
         content = (DateTimeJSONEncoder()
                    .encode(list(Block.objects
                                 .values('when')
                                 .annotate(count=Count('id'))
                                 .order_by('when'))))
+        return http.HttpResponse(content, content_type='application/json')
+
+
+class AllTimeSignUp(TemplateView):
+    def render_to_response(self, context):
+        content = (DateTimeJSONEncoder()
+                   .encode(list(User.objects
+                                .values('date_joined')
+                                .annotate(count=Count('id'))
+                                .order_by('date_joined'))))
         return http.HttpResponse(content, content_type='application/json')
