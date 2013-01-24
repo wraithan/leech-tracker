@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 import logging
 import json
 
@@ -41,7 +41,7 @@ class About(TemplateView):
 
 class DateTimeJSONEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, date):
+        if isinstance(obj, datetime):
             return obj.isoformat()
         else:
             return super(DateTimeJSONEncoder, self).default(obj)
@@ -51,7 +51,7 @@ class AllTimeStats(TemplateView):
     def render_to_response(self, context):
         content = (DateTimeJSONEncoder()
                    .encode(list(Block.objects
-                                .extra({'date':'date("when")'})
-                                .values('date')
-                                .annotate(count=Count('id')))))
+                                .values('when')
+                                .annotate(count=Count('id'))
+                                .order_by('when'))))
         return http.HttpResponse(content, content_type='application/json')

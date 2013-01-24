@@ -2,7 +2,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50}
 var width = 960 - margin.left - margin.right
 var height = 500 - margin.top - margin.bottom
 
-var parseDate = d3.time.format('%Y-%m-%d').parse
+var parseDate = d3.time.format.iso.parse
 
 var x = d3.time.scale()
     .range([0, width])
@@ -33,7 +33,7 @@ d3.json("/stats/all-time.json", function(error, data) {
     var total = 0
     data.forEach(function(d){
         total += d.count
-        d.date = parseDate(d.date)
+        d.date = parseDate(d.when)
         d.count = total
     })
     console.log(data)
@@ -51,5 +51,7 @@ d3.json("/stats/all-time.json", function(error, data) {
         .call(yAxis)
 
     svg.append("path")
-        .attr("d", line(data))
+        .datum(data)
+        .attr("class", "line")
+        .attr("d", line)
 })
