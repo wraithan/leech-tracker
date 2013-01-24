@@ -1,6 +1,9 @@
+from datetime import date
 import logging
+import json
 
 from django import http
+from django.db.models import Count
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
@@ -30,3 +33,25 @@ class BlockUrl(TemplateView):
                                      owner=self.request.user)
         return super(BlockUrl, self).render_to_response(context,
                                                         **response_kwargs)
+
+
+class About(TemplateView):
+    template_name = 'core/about.html'
+
+
+class DateTimeJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, date):
+            return obj.isoformat()
+        else:
+            return super(DateTimeJSONEncoder, self).default(obj)
+
+
+class AllTimeStats(TemplateView):
+    def render_to_response(self, context):
+        content = (DateTimeJSONEncoder()
+                   .encode(list(Block.objects
+                                .extra({'date':'date("when")'})
+                                .values('date')
+                                .annotate(count=Count('id')))))
+        return http.HttpResponse(content, content_type='application/json')

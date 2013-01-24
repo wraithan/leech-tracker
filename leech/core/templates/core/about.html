@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="graph"></div>
+{% endblock content %}
+
+{% block js %}
+<script src="http://d3js.org/d3.v3.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/d3.line.js"></script>
+{% endblock js %}
