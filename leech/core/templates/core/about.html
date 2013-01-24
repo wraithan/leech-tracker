@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 
 {% block head %}
+<title>Leech Tracker - About</title>
 <link rel="stylesheet" href="{{ STATIC_URL }}css/about.css"></style>
 {% endblock head %}
 
 {% block content %}
+<h3>About</h3>
+<p>I built this site in my spare time because I wanted to get some statistics on
+when I am prone to procrastination. In building it I realized I could make it so
+others could use it as well. In the spirit of everything I do, it is open source
+and if you don't trust me with your data (I promise I am not looking at it other
+than for the graphs below) you can run it yourself. It is already primed to run
+on Heroku (procfile, settings, etc) but it is just a Django application so you
+should be able to run it anywhere you have python.</p>
+
+<h3>Stats</h3>
+<p>Below are some stats I find interesting. All times are Pacific Time.</p>
+
+<h4>Number of URLs blocked</h4>
 <div id="graph"></div>
 {% endblock content %}
 
