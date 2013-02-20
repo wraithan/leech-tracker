@@ -2,9 +2,8 @@ from os.path import dirname, abspath, join
 
 import dj_database_url
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
+
+ADMINS = ()
 AUTHENTICATION_BACKENDS = (
     'django_browserid.auth.BrowserIDBackend',
 )
