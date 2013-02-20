@@ -4,6 +4,7 @@ import dj_database_url
 
 
 ADMINS = ()
+ALLOWED_HOSTS = ['*']
 AUTHENTICATION_BACKENDS = (
     'django_browserid.auth.BrowserIDBackend',
 )
